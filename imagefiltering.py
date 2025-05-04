@@ -1,3 +1,4 @@
+
 import cv2
 import numpy as np
 
@@ -16,14 +17,18 @@ def blue_filter(image):
     image[:, :,1] = 0
     return image
 
-
 def main():
-    image = cv2.imread('city.png')
-    new_dimensions= (500,500)
-    image = cv2.resize(image , new_dimensions)
-    cv2.imshow('Original image', image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    file_path = input("Enter the path to the image file: ")
+
+    image = cv2.imread(file_path)
+    if image is None:
+        print("Failed to load image. Please check the path.")
+    else:
+        new_dimensions= (500,500)
+        image = cv2.resize(image , new_dimensions)
+        cv2.imshow("Uploaded Image", image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     filter = 0
     while filter!=5:
         filter = int(input('Enter the number to convert the image to: \n1.Grayscale\n2.Red filter\n3.Green Filter\n4.Blue filter\n5.exit : '))
