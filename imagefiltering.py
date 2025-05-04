@@ -1,6 +1,8 @@
 
 import cv2
 import numpy as np
+from tkinter import filedialog, Tk
+
 
 def red_filter(image):
     image[:, :, 1] = 0
@@ -18,11 +20,17 @@ def blue_filter(image):
     return image
 
 def main():
-    file_path = input("Enter the path to the image file: ")
+    Tk().withdraw()
+
+    file_path = filedialog.askopenfilename(
+        title="Select an image",
+        filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.gif")]
+    )
 
     image = cv2.imread(file_path)
+
     if image is None:
-        print("Failed to load image. Please check the path.")
+        print("Failed to load image.")
     else:
         new_dimensions= (500,500)
         image = cv2.resize(image , new_dimensions)
